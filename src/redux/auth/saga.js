@@ -24,6 +24,10 @@ export function* loginSaga(action) {
             }));
 
             yield put(actions.loginSuccess(response.data.user, response.data.api_token));
+
+            setTimeout(() => {
+                history.push('/users/profile');
+            }, 2000);
         }
     } catch (e) {
         yield put(actions.loginFailure(e.response.data));

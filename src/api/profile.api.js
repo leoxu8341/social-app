@@ -14,14 +14,41 @@ const GET_MY_PROFILE = '/profiles/self';
 export const getProfileList = (params) => {
     let url = apiUrl + GET_PROFILE_LIST;
     
-    // if (params.pageLimit) {
-    //     url += '?page_limit=' + params.pageLimit;
-    // }
-
     if (params.pageIndex) {
         url += '?page_index=' + params.pageIndex;
     }
 
+    if (params.name) {
+        url += '&name=' + params.name;
+    }
+
+    if (params.ageMin) {
+        url += '&age_min=' + params.ageMin;
+    }
+
+    if (params.ageMax) {
+        url += '&age_max=' + params.ageMax;
+    }
+
+    if (params.feet) {
+        url += '&height_feet=' + params.feet;
+    }
+
+    if (params.inch) {
+        url += '&height_inch=' + params.inch;
+    }
+
+    if (params.gender) {
+        url += '&gender=' + params.gender;
+    }
+    if (params.state) {
+        url += '&state=' + params.state;
+    }
+    if (params.hobbies && params.hobbies.length>0) {
+        params.hobbies.map((item) => {
+            url += '&hobbies[]=' + item; return
+        })
+    }
    
     return (
         axios.get(url, {headers: {'Authorization': 'Bearer ' + cookies.get('app_token')}})
