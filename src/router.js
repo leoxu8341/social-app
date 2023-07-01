@@ -41,7 +41,7 @@ const PublicRoutes = ({history, isLoggedIn}) => {
                             <Route exact path={'/reports/top/senders'} element={<Senders />} />
                             <Route exact path={'/reports/profiles/created'} element={<ProfilesCreated />} />
                             <Route exact path={'/reports/profiles/users'} element={<Users />} />
-                            <Route exact path={'/reports/profiles/users/view'} element={<UsersView />} />
+                            <Route exact path={'/reports/profiles/users/:id/view'} element={<UsersView />} />
                         </Route> 
                         
                     </Route>

@@ -69,19 +69,19 @@ const App: React.FC = (props) => {
               key: 'profile',
               icon: <UserOutlined />,
               label: 'My Profile',
-              onClick: () => { console.log('profile clicked'); navigate('/profile'); }
+              onClick: () => { navigate('/profile'); }
             },
             {
               key: 'users',
               icon: <TeamOutlined />,
               label: 'Users',
-              onClick: () => { console.log('users clicked'); navigate('/users/profile'); }
+              onClick: () => { navigate('/users/profile'); }
             },
             {
               key: 'inbox',
               icon: <MailOutlined />,
               label: 'Inbox',
-              onClick: () => { console.log('inbox clicked'); navigate('/inbox'); }
+              onClick: () => { navigate('/inbox'); }
             },
             {
               key: 'reports',
@@ -92,25 +92,25 @@ const App: React.FC = (props) => {
                   key: 'report_logins',
                   icon: <LoginOutlined />,
                   label: 'Recent Logins',
-                  onClick: () => { console.log('inbox clicked'); navigate('/reports/logins'); }
+                  onClick: () => { navigate('/reports/logins'); }
                 },
                 {
                   key: 'report_top_senders',
                   icon: <UsergroupAddOutlined />,
                   label: 'Top Senders',
-                  onClick: () => { console.log('inbox clicked'); navigate('/reports/top/senders'); }
+                  onClick: () => {navigate('/reports/top/senders'); }
                 },
                 {
                   key: 'report_profiles_created',
                   icon: <ProfileOutlined />,
                   label: 'Recent Profiles',
-                  onClick: () => { console.log('inbox clicked'); navigate('/reports/profiles/created'); }
+                  onClick: () => {navigate('/reports/profiles/created'); }
                 },
                 {
                   key: 'report_profile_view_users',
                   icon: <FundViewOutlined />,
                   label: 'Profile Views',
-                  onClick: () => { console.log('inbox clicked'); navigate('/reports/profiles/users'); }
+                  onClick: () => { navigate('/reports/profiles/users'); }
                 },
               ]
             }
