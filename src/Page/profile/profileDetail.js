@@ -26,7 +26,7 @@ const ProfileDetail = (props) => {
 
     useEffect(() => {
         if (id) {
-            setSidebarKey('profile');
+            setSidebarKey('users');
             profileOneRequest(id);
         }
     }, []);

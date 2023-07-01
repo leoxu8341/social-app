@@ -13,7 +13,7 @@ const {
     letterOpenRequest
 } = letterAction;
 
-const { messageListRequest } = messageAction;
+const { messageListRequest, messagePostRequest } = messageAction;
 
 const { setSidebarKey } = appAction;
 const { TextArea } = Input;
@@ -21,7 +21,7 @@ const { Meta } = Card;
 const Letter = (props) => {
     const [body, setBody] = useState(null);
     const { id } = useParams()
-    const { letter, user, loading, messageLoading, messages, letterOneRequest, messageListRequest, setSidebarKey, letterOpenRequest } = { ...props };
+    const { letter, user, loading, messageOneLoading, messagePostRequest, messageLoading, messages, letterOneRequest, messageListRequest, setSidebarKey, letterOpenRequest } = { ...props };
 
     useEffect(() => {
         if (id) {
@@ -33,7 +33,14 @@ const Letter = (props) => {
     }, []);
 
     const handleOnClick = () => {
-       
+       if (id && body && body !== '') {
+           messagePostRequest(id, body);
+
+           setTimeout(() => {
+               setBody(null);
+
+           }, 1000);
+       }
     }
 
     return (<div>
@@ -71,9 +78,10 @@ const Letter = (props) => {
         <Row>
             <Col span={24}>
             <List
+                    loading={messageLoading}
                 size="small"
                 bordered
-                    dataSource={messages && messages.length > 0 ?
+                    dataSource={messages && messages.length > 0 ? 
                         messages.map((item, i) => {
                             return {
                                 ...item,
@@ -85,13 +93,17 @@ const Letter = (props) => {
                         }) : []}
                 renderItem={(item) => 
                     <List.Item >
-                        <Row style={{ width: 750 }}>
-                            <Col span={24}>
-                            {item.isReceived ? 
-                                <Col span={18}>{item.body} {item.created_at}</Col> :
-                                <Col span={18} offset={18}>{item.body} {item.created_at}</Col>}
-                            </Col>
-                        </Row>
+                        {item.isReceived ? 
+                        <Row style={{ width: "100%", textAlign: 'left' }}>
+                
+                            
+                                <Col span={24}>{item.body} {item.created_at}</Col> 
+                                 </Row> :
+                            <Row style={{ width: "100%", textAlign: 'right' }}>
+                                    <Col span={24}><span style={{textAlign: 'right'}}>{item.body} {item.created_at}</span></Col>
+                                    </Row>}
+                            
+                       
                         
                     </List.Item>}
                 />
@@ -103,7 +115,7 @@ const Letter = (props) => {
             <TextArea rows={1} placeholder="" value={body} onChange={e => setBody(e.target.value)} />
         </Row>
         <Row style={{marginTop: 10}}>
-            <Button size="small" type="primary" onClick={() => handleOnClick()}>Send</Button>
+            <Button loading={messageOneLoading} size="small" type="primary" onClick={() => handleOnClick()}>Send</Button>
         </Row>
 </div>
 
@@ -116,9 +128,10 @@ export default connect(
         letter: state.letter.get('letter'),
         messageLoading: state.message.get('loading'),
         messages: state.message.get('messages'),
+        messageOneLoading: state.message.get('oneLoading'),
         user: state.auth.get('user')
     }),
     {
-        letterOneRequest, setSidebarKey, letterOpenRequest, messageListRequest
+        letterOneRequest, setSidebarKey, messagePostRequest, letterOpenRequest, messageListRequest
     }
 )(Letter);

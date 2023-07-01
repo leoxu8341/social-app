@@ -17,7 +17,24 @@ const actions = {
         payload: [],
         error
     }),
+    MESSAGE_POST_REQUEST: 'MESSAGE_POST_REQUEST',
+    MESSAGE_POST_SUCCESS: 'MESSAGE_POST_SUCCESS',
+    MESSAGE_POST_FAILURE: 'MESSAGE_POST_FAILURE',
 
+    messagePostRequest: (id, body) => ({
+        type: actions.MESSAGE_POST_REQUEST,
+        id,
+        body
+    }),
+    messagePostSuccess: () => ({
+        type: actions.MESSAGE_POST_SUCCESS,
+        payload: null
+    }),
+    messagePostFailure: (error) => ({
+        type: actions.MESSAGE_POST_FAILURE,
+        payload: null,
+        error
+    }),
     
 };
 

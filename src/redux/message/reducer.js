@@ -5,6 +5,7 @@ const initState = new fromJS({
     loading: false,
     messages: [],
     error: null,
+    oneLoading: false,
 });
 
 export default function reducer(state = initState, action) {
@@ -20,6 +21,18 @@ export default function reducer(state = initState, action) {
         case actions.MESSAGE_LIST_FAILURE:
             return state
                 .set('loading', false)
+                .set('error', action.error);
+
+        case actions.MESSAGE_POST_REQUEST:
+            return state.set('oneLoading', true);
+    
+        case actions.MESSAGE_POST_SUCCESS:
+            return state
+                .set('oneLoading', false);
+
+        case actions.MESSAGE_POST_FAILURE:
+            return state
+                .set('oneLoading', false)
                 .set('error', action.error);
 
         default:

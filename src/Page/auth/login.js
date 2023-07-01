@@ -14,7 +14,7 @@ const {loginRequest, removeErrors} = authActions;
 class Login extends Component {
    componentDidMount() {
     if (this.props.isLoggedIn === true) {
-      this.props.navigate('/users/profile');
+      this.props.navigate('/profile');
     }
   }
   onFinish = (values) => {

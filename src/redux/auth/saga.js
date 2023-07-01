@@ -26,8 +26,8 @@ export function* loginSaga(action) {
             yield put(actions.loginSuccess(response.data.user, response.data.api_token));
 
             setTimeout(() => {
-                history.push('/users/profile');
-            }, 2000);
+                history.push('/profile');
+            }, 1500);
         }
     } catch (e) {
         yield put(actions.loginFailure(e.response.data));
@@ -44,11 +44,11 @@ export function* registerSaga(action) {
             }));
 
             yield put(actions.registerSuccess(response.data));
-            message.success(`User: ${action.username} created!`)
+            message.success(`User: ${action.first} ${action.last} created!`)
 
             setTimeout(() => {
                 history.push('/login');
-            }, 2000);
+            }, 1500);
         }
     } catch (e) {
         yield put(actions.registerFailure(e.response.data));

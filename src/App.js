@@ -24,6 +24,7 @@ const App: React.FC = (props) => {
       <Sider
         breakpoint="lg"
         collapsedWidth="0"
+        width={280}
         onBreakpoint={(broken) => {
           //console.log(broken);
         }}
@@ -47,7 +48,8 @@ const App: React.FC = (props) => {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={[props.currentKey]}
+          defaultSelectedKeys={['profile']}
+          selectedKeys={[props.currentKey]}
           items={[
             {
               key: 'profile',

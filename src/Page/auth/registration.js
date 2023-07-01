@@ -3,8 +3,7 @@ import {connect} from 'react-redux';
 import {
   Form,
   Input,
-  Button,
-  // message
+  Button
 } from 'antd';
 import authActions from '../../redux/auth/actions';
 
