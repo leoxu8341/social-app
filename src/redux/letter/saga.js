@@ -3,7 +3,8 @@ import actions from './actions';
 import {
     getLetterList,
     getLetter,
-    postLetter
+    postLetter,
+    openLetter
 } from '../../api/letter.api';
 
 
@@ -25,6 +26,15 @@ export function* postLetterSaga(action) {
     }
 }
 
+export function* openLetterSaga(action) {
+    try {
+        yield call(openLetter, action.id);
+        yield put(actions.letterOpenSuccess());
+    } catch (e) {
+        yield put(actions.letterOpenFailure(e));
+    }
+}
+
 export function* getLetterSaga(action) {
     try {
         const response = yield call(getLetter, action.id);
@@ -38,6 +48,7 @@ export default function* rootSaga() {
     yield all([
         takeEvery(actions.LETTER_LIST_REQUEST, getLettersSaga),
         takeEvery(actions.LETTER_ONE_REQUEST, getLetterSaga),
-        takeEvery(actions.LETTER_POST_REQUEST, postLetterSaga)
+        takeEvery(actions.LETTER_POST_REQUEST, postLetterSaga),
+        takeEvery(actions.LETTER_OPEN_REQUEST, openLetterSaga)
     ]);
 };

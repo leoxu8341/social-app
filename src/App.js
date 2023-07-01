@@ -47,7 +47,7 @@ const App: React.FC = (props) => {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={['users']}
+          defaultSelectedKeys={[props.currentKey]}
           items={[
             {
               key: 'profile',
@@ -127,6 +127,7 @@ export default connect(
     errors: state.auth.get('error'),
     loading: state.auth.get('loading'),
     isLoggedIn: state.auth.get('apiToken') !== null,
+    currentKey: state.app.get('current')
   }),
   { logoutRequest }
 )(App);

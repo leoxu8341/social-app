@@ -5,11 +5,12 @@ import { useParams } from 'react-router-dom';
 import profileAction from '../../redux/profiles/actions';
 import letterAction from '../../redux/letter/actions';
 import notification from '../../notification';
+import appAction from '../../redux/app/actions';
 
 const {
     profileOneRequest
 } = profileAction;
-
+const { setSidebarKey } = appAction;
 const {
     letterPostRequest
 } = letterAction;
@@ -21,10 +22,11 @@ const ProfileDetail = (props) => {
     const [body, setBody] = useState(null);
     const [confirmLoading, setConfirmLoading] = useState(false);
     const { id } = useParams()
-    const { profile, loading, profileOneRequest, letterPostRequest } = { ...props };
+    const { profile, loading, profileOneRequest, letterPostRequest, setSidebarKey } = { ...props };
 
     useEffect(() => {
         if (id) {
+            setSidebarKey('profile');
             profileOneRequest(id);
         }
     }, []);
@@ -132,6 +134,7 @@ export default connect(
     }),
     { 
         profileOneRequest,
-        letterPostRequest
+        letterPostRequest,
+        setSidebarKey
      }
 )(ProfileDetail);

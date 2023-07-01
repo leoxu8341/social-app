@@ -61,18 +61,22 @@ const actions = {
         error
     }),
 
-    // MESSAGE_DELETE_REQUEST: 'MESSAGE_DELETE_REQUEST',
-    // MESSAGE_DELETE_FAILURE: 'MESSAGE_DELETE_FAILURE',
-
-    // messageDeleteRequest: (id) => ({
-    //     type: actions.MESSAGE_DELETE_REQUEST,
-    //     id
-    // }),
-    // messageDeleteFailure: (error) => ({
-    //     type: actions.MESSAGE_DELETE_FAILURE,
-    //     payload: [],
-    //     error
-    // })
+    LETTER_OPEN_REQUEST: 'LETTER_OPEN_REQUEST',
+    LETTER_OPEN_SUCCESS: 'LETTER_OPEN_SUCCESS',
+    LETTER_OPEN_FAILURE: 'LETTER_OPEN_FAILURE',
+    letterOpenRequest: (id) => ({
+        type: actions.LETTER_OPEN_REQUEST,
+        id
+    }),
+    letterOpenSuccess: () => ({
+        type: actions.LETTER_OPEN_SUCCESS,
+        payload: null
+    }),
+    letterOpenFailure: (error) => ({
+        type: actions.LETTER_OPEN_FAILURE,
+        payload: null,
+        error
+    }),
 };
 
 export default actions;

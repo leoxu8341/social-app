@@ -4,10 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import profileAction from '../../redux/profiles/actions';
 import {states} from '../../static';
+import appAction from '../../redux/app/actions';
 const {
     profileListRequest,
     hobbyListRequest
 } = profileAction;
+const { setSidebarKey } = appAction;
 
 const UserProfiles = (props) => {
     const [visible, setVisible] = useState(false);
@@ -24,9 +26,10 @@ const UserProfiles = (props) => {
     const [hobbies, setHobbies] = useState([]);
     const [confirmLoading, setConfirmLoading] = useState(false);
     const navigate = useNavigate();
-    const { profiles, loading, hobbyLoading, hobbyList, profileListRequest, hobbyListRequest } = { ...props };
+    const { profiles, loading, hobbyLoading, setSidebarKey, hobbyList, profileListRequest, hobbyListRequest } = { ...props };
 
     useEffect(() => {
+        setSidebarKey('users');
         profileListRequest({pageIndex: 1});
     }, []);
 
@@ -294,5 +297,5 @@ export default connect(
         hobbyList: state.profile.get('hobbies'),
         hobbyLoading: state.profile.get('hobbyLoading')
     }),
-    { profileListRequest, hobbyListRequest }
+    { profileListRequest, hobbyListRequest, setSidebarKey }
 )(UserProfiles);

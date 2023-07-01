@@ -54,6 +54,17 @@ export default function reducer(state = initState, action) {
             return state
                 .set('oneLoading', false)
                 .set('error', action.error);
+        case actions.LETTER_OPEN_REQUEST:
+            return state.set('oneLoading', true);
+
+        case actions.LETTER_OPEN_SUCCESS:
+            return state
+                .set('oneLoading', false);
+
+        case actions.LETTER_OPEN_FAILURE:
+            return state
+                .set('oneLoading', false)
+                .set('error', action.error);
 
         case actions.RESET_PROFILE_STATE:
             return state = initState;

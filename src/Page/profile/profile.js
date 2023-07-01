@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import profileAction from '../../redux/profiles/actions';
 import {states} from '../../static';
+import appAction from '../../redux/app/actions';
 const { Option } = Select;
 const {
     profileMyRequest,
@@ -12,7 +13,7 @@ const {
     profileUpdateRequest
 } = profileAction;
 
-
+const { setSidebarKey } = appAction;
 const { TextArea } = Input;
 const { Meta } = Card;
 const Profile = (props) => {
@@ -25,9 +26,10 @@ const Profile = (props) => {
     const [hobbies, setHobbies] = useState([]);
     
     const { id } = useParams()
-    const { profile, hobbyList, hobbyLoading, loading, profileMyRequest, hobbyListRequest, profilePostRequest, profileUpdateRequest } = { ...props };
+    const { profile, hobbyList, setSidebarKey, hobbyLoading, loading, profileMyRequest, hobbyListRequest, profilePostRequest, profileUpdateRequest } = { ...props };
 
     useEffect(() => {
+        setSidebarKey('profile');
         profileMyRequest();
     }, []);
 
@@ -269,6 +271,7 @@ export default connect(
         profileMyRequest,
         hobbyListRequest,
         profilePostRequest,
-        profileUpdateRequest
+        profileUpdateRequest,
+        setSidebarKey
     }
 )(Profile);

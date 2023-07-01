@@ -4,20 +4,21 @@ import { useState, useEffect } from 'react';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
 import reportAction from '../../redux/report/actions';
-
+import appAction from '../../redux/app/actions';
 const {
     reportUserProfileViewRequest
 } = reportAction;
-
+const { setSidebarKey } = appAction;
 const { Meta } = Card;
 const UsersView = (props) => {
     const { id } = useParams()
     const [position, setPosition] = useState('bottom');
     const [align, setAlign] = useState('center');
-    const { reports, loading, params, reportUserProfileViewRequest } = { ...props };
+    const { reports, loading, params, setSidebarKey, reportUserProfileViewRequest } = { ...props };
 
     useEffect(() => {
         if (id) {
+            setSidebarKey('report_profile_view_users');
             reportUserProfileViewRequest(id, {pageIndex: 1});
         }
     }, []);
@@ -108,6 +109,6 @@ export default connect(
         params: state.report.get('params')
     }),
     {
-        reportUserProfileViewRequest
+        reportUserProfileViewRequest, setSidebarKey
     }
 )(UsersView);

@@ -3,19 +3,20 @@ import { connect } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import reportAction from '../../redux/report/actions';
-
+import appAction from '../../redux/app/actions';
 const {
     reportUserListRequest
 } = reportAction;
+const { setSidebarKey } = appAction;
 
 const Users = (props) => {
     const [position, setPosition] = useState('bottom');
     const [align, setAlign] = useState('center');
     const navigate = useNavigate();
-    const { reports, params, loading, reportUserListRequest } = { ...props };
+    const { reports, params, loading, setSidebarKey, reportUserListRequest } = { ...props };
 
     useEffect(() => {
-        //console.log(props);
+        setSidebarKey('report_profile_view_users');
         reportUserListRequest({ pageIndex: 1 });
     }, []);
 
@@ -76,5 +77,5 @@ export default connect(
         reports: state.report.get('profileViewUsers'),
         params: state.report.get('params')
     }),
-    { reportUserListRequest }
+    { reportUserListRequest, setSidebarKey }
 )(Users);

@@ -11,13 +11,13 @@ const GET_ONE_LETTER = '/letters/:id';
 
 export const getLetterList = (params) => {
     let url = apiUrl + GET_LETTER_LIST;
-    
-    // if (params.pageLimit) {
-    //     url += '?page_limit=' + params.pageLimit;
-    // }
 
     if (params.pageIndex) {
         url += '?page_index=' + params.pageIndex;
+    }
+
+    if (params.receiver === true || params.receiver === false) {
+        url += '&recevier=' + params.receiver;
     }
 
    
@@ -36,6 +36,13 @@ export const postLetter = (receiver, subject, body) => {
     };
 
     return axios.post(url, value, { headers: { 'Authorization': 'Bearer ' + cookies.get('app_token')}});
+};
+
+export const openLetter = (id) => {
+    const baseUrl = apiUrl + GET_ONE_LETTER;
+    let url = baseUrl.replace(':id', id);
+
+    return axios.patch(url, {}, { headers: { 'Authorization': 'Bearer ' + cookies.get('app_token') } });
 };
 
 export const getLetter = (id) => {

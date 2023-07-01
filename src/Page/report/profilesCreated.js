@@ -3,18 +3,22 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { useState, useEffect } from 'react';
 import reportAction from '../../redux/report/actions';
+import appAction from '../../redux/app/actions';
 
 const {
     reportProfileListRequest
 } = reportAction;
 
+const { setSidebarKey } = appAction;
+
 const ProfilesCreated = (props) => {
     const [position, setPosition] = useState('bottom');
     const [align, setAlign] = useState('center');
 
-    const { reports, params, loading, reportProfileListRequest } = { ...props };
+    const { reports, params, setSidebarKey, loading, reportProfileListRequest } = { ...props };
 
     useEffect(() => {
+        setSidebarKey('report_profiles_created');
         reportProfileListRequest(params);
     }, []);
 
@@ -82,5 +86,5 @@ export default connect(
         reports: state.report.get('recentProfiles'),
         params: state.report.get('params')
     }),
-    { reportProfileListRequest }
+    { reportProfileListRequest, setSidebarKey }
 )(ProfilesCreated);

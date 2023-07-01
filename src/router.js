@@ -14,7 +14,8 @@ import UsersView from './Page/report/usersView';
 import Inbox from './Page/letter/inbox';
 import Profile from './Page/profile/profile';
 import ProfileDetail from './Page/profile/profileDetail';
-import Registration from './Page/auth/registration'
+import Registration from './Page/auth/registration';
+import Letter from './Page/letter/letterDetail';
 
 
 const PublicRoutes = ({history, isLoggedIn}) => {
@@ -37,6 +38,7 @@ const PublicRoutes = ({history, isLoggedIn}) => {
                             <Route exact path={'/users/profile'} element={<UserProfiles />} />
                             <Route exact path={'/users/profile/:id'} element={<ProfileDetail />} />
                             <Route exact path={'/inbox'} element={<Inbox />} />
+                            <Route exact path={'/letters/:id'} element={<Letter />} />
                             <Route exact path={'/reports/logins'} element={<Logins />} />
                             <Route exact path={'/reports/top/senders'} element={<Senders />} />
                             <Route exact path={'/reports/profiles/created'} element={<ProfilesCreated />} />

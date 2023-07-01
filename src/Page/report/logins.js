@@ -3,19 +3,19 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { useState, useEffect } from 'react';
 import reportAction from '../../redux/report/actions';
-
+import appAction from '../../redux/app/actions';
 const {
     reportLoginListRequest
 } = reportAction;
-
+const { setSidebarKey } = appAction;
 const Logins = (props) => {
     const [position, setPosition] = useState('bottom');
     const [align, setAlign] = useState('center');
   
-    const { reports, params, loading, reportLoginListRequest } = { ...props };
+    const { reports, params, loading, reportLoginListRequest, setSidebarKey } = { ...props };
 
     useEffect(() => {
-        //console.log(props);
+        setSidebarKey('report_logins');
         reportLoginListRequest(params);
     }, []);
 
@@ -75,5 +75,5 @@ export default connect(
         reports: state.report.get('logins'),
         params: state.report.get('params')
     }),
-    { reportLoginListRequest }
+    { reportLoginListRequest, setSidebarKey }
 )(Logins);

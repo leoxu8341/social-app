@@ -3,20 +3,23 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { useState, useEffect } from 'react';
 import reportAction from '../../redux/report/actions';
+import appAction from '../../redux/app/actions';
 
 const {
     reportSenderListRequest
 } = reportAction;
+
+const { setSidebarKey } = appAction;
 
 const Senders = (props) => {
     const [position, setPosition] = useState('bottom');
     const [align, setAlign] = useState('center');
     const [read, setRead] = useState(null);
 
-    const { reports, params, loading, reportSenderListRequest } = { ...props };
+    const { reports, params, loading, reportSenderListRequest, setSidebarKey } = { ...props };
 
     useEffect(() => {
-        //console.log(props);
+        setSidebarKey('report_top_senders');
         reportSenderListRequest({pageIndex: 1});
     }, []);
 
@@ -126,5 +129,5 @@ export default connect(
         reports: state.report.get('senders'),
         params: state.report.get('params')
     }),
-    { reportSenderListRequest }
+    { reportSenderListRequest, setSidebarKey }
 )(Senders);
