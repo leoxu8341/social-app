@@ -1,10 +1,8 @@
-import { useNavigate, Outlet } from 'react-router-dom';
+import { useNavigate, Outlet } from 'react-router-dom'
 
 const AuthenticatedRoutes = ({ isLoggedIn }) => {
-    const navigate = useNavigate();
-    return (
-        isLoggedIn ? <Outlet /> : navigate('/login')
-    );
-};
+  const navigate = useNavigate()
+  return isLoggedIn ? <Outlet /> : navigate('/login')
+}
 
-export default AuthenticatedRoutes;
+export default AuthenticatedRoutes
