@@ -8,7 +8,7 @@ const apiUrl = config.apiUrl;
 const GET_REPORT_LOGIN_LIST = '/reports/logins';
 const GET_REPORT_PROFILE_LIST = '/reports/profiles';
 const GET_REPORT_SENDERS = '/reports/senders/top';
-const GET_REPORT_USERS = 'reports/users';
+const GET_REPORT_USERS = '/reports/users';
 const GET_USERS_PROFILE_VIEW = '/reports/users/:id/profiles/view';
 
 
