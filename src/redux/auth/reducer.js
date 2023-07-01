@@ -51,7 +51,8 @@ export default function loginReducer(state = initState, action) {
             return state
                 .set('loading', false)
                 .set('apiToken', null)
-                .set('error', null);
+                .set('error', null)
+                .set('user', null);
 
         default:
             return state;

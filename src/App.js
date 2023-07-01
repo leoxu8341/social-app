@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
-
-import { DatabaseOutlined, UserOutlined, MailOutlined, TeamOutlined, UsergroupAddOutlined, ProfileOutlined, LoginOutlined, FundViewOutlined } from '@ant-design/icons';
-import { Layout, Menu, theme, Avatar } from 'antd';
+import authAction from './redux/auth/actions';
+import { DatabaseOutlined, UserOutlined, LogoutOutlined, MailOutlined, TeamOutlined, UsergroupAddOutlined, ProfileOutlined, LoginOutlined, FundViewOutlined } from '@ant-design/icons';
+import { Layout, Menu, theme, Avatar, Row, Col, Tooltip } from 'antd';
 
 const { Header, Sider, Content, Footer } = Layout;
-
+const { logoutRequest } = authAction;
 const App: React.FC = (props) => {
   const [collapsed, setCollapsed] = useState(false);
   const {
@@ -14,27 +14,11 @@ const App: React.FC = (props) => {
   } = theme.useToken();
   const navigate = useNavigate();
 
-  // function getItem(label, key, icon, children, onClick) {
-  //   return {
-  //     key,
-  //     icon,
-  //     children,
-  //     label,
-  //     onClick
-  //   };
-  // }
-
-  // const items = [
-  //   getItem('Option 1', '1', <PieChartOutlined />),
-  //   getItem('Option 2', '2', <DesktopOutlined />),
-  //   getItem('User', 'sub1', <UserOutlined />, [
-  //     getItem('Tom', '3'),
-  //     getItem('Bill', '4'),
-  //     getItem('Alex', '5'),
-  //   ])
-  // ];
-
-
+  useEffect(() => {
+    if (!props.isLoggedIn) {
+      navigate('/login');
+    }
+  }, []);
   return (
     <Layout style={{ height: '100vh' }}>
       <Sider
@@ -118,7 +102,15 @@ const App: React.FC = (props) => {
         />
       </Sider>
       <Layout style={{ background: '#d5dbe8' }}>
-        <Header style={{ padding: 0, background: 'white' }} />
+        <Header style={{ padding: 0, background: 'white' }} >
+          <Row>
+            <Col span={2} offset={22}>
+              <Tooltip title="Logout">
+                <LogoutOutlined onClick={() => { props.logoutRequest(); navigate('/login') }} />
+              </Tooltip>
+            </Col>
+          </Row>
+          </Header>
         <Content style={{ margin: '24px 16px 0' }}>
           <div style={{ padding: 24, minHeight: 680, background: 'white' }}>
             <Outlet />
@@ -133,7 +125,8 @@ export default connect(
   state => ({
     user: state.auth.get('user'),
     errors: state.auth.get('error'),
-    loading: state.auth.get('loading')
+    loading: state.auth.get('loading'),
+    isLoggedIn: state.auth.get('apiToken') !== null,
   }),
-  {}
+  { logoutRequest }
 )(App);
